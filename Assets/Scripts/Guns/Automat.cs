@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Guns;
 using UnityEngine;
 using UnityEngine.UI;

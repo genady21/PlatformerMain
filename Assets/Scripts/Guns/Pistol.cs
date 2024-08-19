@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Gun
+namespace Guns
 {
+    public class Pistol : Gun
+    {
     
+    }
 }
+

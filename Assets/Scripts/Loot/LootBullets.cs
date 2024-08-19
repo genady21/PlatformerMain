@@ -1,18 +1,23 @@
 using Guns;
 using UnityEngine;
 
-public class LootBullets : MonoBehaviour
+namespace Loot
 {
-    [SerializeField] private int _gunIndex;
-    [SerializeField] private int _numberOfBullets;
-    [SerializeField] private AudioSource _audioSource;
-    private void OnTriggerEnter(Collider other)
+    public class LootBullets : MonoBehaviour
     {
-        if (other.attachedRigidbody.GetComponent<PlayerArmory>())
+        [SerializeField] private int _gunIndex;
+        [SerializeField] private int _numberOfBullets;
+        [SerializeField] private AudioSource _audioSource;
+
+        private void OnTriggerEnter(Collider other)
         {
-            _audioSource.Play();
-            other.attachedRigidbody.GetComponent<PlayerArmory>().AddBullets(_gunIndex,_numberOfBullets);
-            Destroy(gameObject);
+            if (other.attachedRigidbody.GetComponent<PlayerArmory>())
+            {
+                _audioSource.Play();
+                other.attachedRigidbody.GetComponent<PlayerArmory>().AddBullets(_gunIndex, _numberOfBullets);
+                Destroy(gameObject);
+            }
         }
     }
 }
+

@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public class LootHeal : MonoBehaviour
+namespace Loot
 {
-    [SerializeField] private int _healthValue=1;
-    private void OnTriggerEnter(Collider other)
+    public class LootHeal : MonoBehaviour
     {
-        if (other.attachedRigidbody.GetComponent<PlayerHealth>())
+        [SerializeField] private int _healthValue = 1;
+
+        private void OnTriggerEnter(Collider other)
         {
-            other.attachedRigidbody.GetComponent<PlayerHealth>().AddHealth(_healthValue);
-            Destroy(gameObject);
+            if (other.attachedRigidbody.GetComponent<PlayerHealth>())
+            {
+                other.attachedRigidbody.GetComponent<PlayerHealth>().AddHealth(_healthValue);
+                Destroy(gameObject);
+            }
         }
     }
 }
