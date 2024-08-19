@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LootHeal : MonoBehaviour
@@ -11,6 +8,7 @@ public class LootHeal : MonoBehaviour
         if (other.attachedRigidbody.GetComponent<PlayerHealth>())
         {
             other.attachedRigidbody.GetComponent<PlayerHealth>().AddHealth(_healthValue);
+            Destroy(gameObject);
         }
     }
 }
