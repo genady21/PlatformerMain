@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Guns
 {
-
     public class JumpGun : MonoBehaviour
     {
         [SerializeField] private Rigidbody _playerRigidbody;
@@ -39,7 +38,6 @@ namespace Guns
                     _chargeIcon.StopCharge();
                 }
             }
-
         }
     }
 }

@@ -1,35 +1,50 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu
 {
-    
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private GameObject _menuButton;
+        [SerializeField] private Button _menuButton;
         [SerializeField] private GameObject _menuWindow;
-
-      //  [SerializeField] private Button _buttonResetLvl;
         
+        [SerializeField] private Button _againButton;
+        [SerializeField] private Button _continueButton;
+        
+      private void Start()
+      {
+          _againButton.onClick.AddListener(RestartLvl);
+          _continueButton.onClick.AddListener(CloseMenuWindow);
+          _menuButton.onClick.AddListener(OpenMenuWindow);
+      }
 
-        public void OpenMenuWindow()
+      private void OnDestroy()
+      {
+          _againButton.onClick.RemoveListener(RestartLvl);
+          _menuButton.onClick.RemoveListener(OpenMenuWindow);
+          _continueButton.onClick.RemoveListener(CloseMenuWindow);
+      }
+
+      public void OpenMenuWindow()
         {  
-            _menuButton.SetActive(false);
+            _menuButton.gameObject.SetActive(false);
             _menuWindow.SetActive(true);
+            Time.timeScale = 0f;
+
         }
 
         public void CloseMenuWindow()
         {
-            _menuButton.SetActive(true);
+            _menuButton.gameObject.SetActive(true);
             _menuWindow.SetActive(false);
+            Time.timeScale = 1f;
         }
 
         public void RestartLvl()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1f;
         }
     }
 }

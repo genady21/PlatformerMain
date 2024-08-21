@@ -33,7 +33,7 @@ namespace Player
             {
                 yEuler = Mathf.Lerp(yEuler, -45f, Time.deltaTime * 15f);
             }
-
+            
             Body.localEulerAngles = new Vector3(0, yEuler, 0);
         }
     }
