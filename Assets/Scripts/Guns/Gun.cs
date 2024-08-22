@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Guns
 {
-
     public class Gun : MonoBehaviour
     {
         [SerializeField] private GameObject _bulletPrefab;

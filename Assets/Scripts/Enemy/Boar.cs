@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class Boar : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private float _attackPeriod;
-    [SerializeField] private Animator _animator;
-    private float _timer;
-
-    private void Update()
+    public class Boar : MonoBehaviour
     {
-        _timer += Time.deltaTime;
-        if (_timer > _attackPeriod)
+        [SerializeField] private float _attackPeriod;
+        [SerializeField] private Animator _animator;
+        private float _timer;
+
+        private void Update()
         {
-            _timer = 0;
-            _animator.SetTrigger("Attack");
+            _timer += Time.deltaTime;
+            if (_timer > _attackPeriod)
+            {
+                _timer = 0;
+                _animator.SetTrigger("Attack");
+            }
         }
     }
 }

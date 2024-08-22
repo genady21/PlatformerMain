@@ -1,20 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace Guns
 {
-    [SerializeField] private GameObject _effectPrefab;
-
-    private void Start()
+    public class Bullet : MonoBehaviour
     {
-        Destroy(gameObject,4f);
-    }
+        [SerializeField] private GameObject _effectPrefab;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Instantiate(_effectPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        private void Start()
+        {
+            Destroy(gameObject, 4f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            Instantiate(_effectPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            var enemy = other.GetComponent<TakeDmgOnTrigger>();
+            if (enemy != null)
+            {
+                Instantiate(_effectPrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
     }
 }

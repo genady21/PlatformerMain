@@ -6,6 +6,7 @@ namespace Guns
     {
         [SerializeField] private Gun[] _guns;
         [SerializeField] private int _currentGunIndex;
+        [SerializeField] private AudioSource _audio;
 
         private void Start()
         {
@@ -32,6 +33,7 @@ namespace Guns
         public void AddBullets(int gunIndex, int numberOfBullest)
         {
             _guns[gunIndex].AddBullets(numberOfBullest);
+            _audio.Play();
         }
     }
     

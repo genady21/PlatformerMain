@@ -1,76 +1,78 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-
-public enum Direction
+namespace Enemy
 {
-   Left,
-   Right,
-}
-public class Walker : MonoBehaviour
-{
-   [SerializeField] private Transform _leftTarget;
-   [SerializeField] private Transform _rightTarget;
-
-   [SerializeField] private float _speed;
-   
-   [SerializeField] private float _stopTime;
-   
-   [SerializeField] private Direction _currentDirection;
-
-   private bool _isStoped;
-   
-    public UnityEvent eventOnLeftTarget;
-    public UnityEvent eventOnRightTarget;
-
-    [SerializeField] private Transform _rayStart;
-   private void Start()
+   public enum Direction
    {
-      _leftTarget.parent = null;
-      _rightTarget.parent = null;
+      Left,
+      Right,
    }
 
-   private void Update()
+   public class Walker : MonoBehaviour
    {
-      if (_isStoped)
+      [SerializeField] private Transform _leftTarget;
+      [SerializeField] private Transform _rightTarget;
+
+      [SerializeField] private float _speed;
+
+      [SerializeField] private float _stopTime;
+
+      [SerializeField] private Direction _currentDirection;
+
+      private bool _isStoped;
+
+      public UnityEvent eventOnLeftTarget;
+      public UnityEvent eventOnRightTarget;
+
+      [SerializeField] private Transform _rayStart;
+
+      private void Start()
       {
-         return;
+         _leftTarget.parent = null;
+         _rightTarget.parent = null;
       }
-      
-      if (_currentDirection == Direction.Left)
+
+      private void Update()
       {
-         transform.position -= new Vector3(Time.deltaTime * _speed, 0f, 0f);
-         if (transform.position.x < _leftTarget.position.x)
+         if (_isStoped)
          {
-            _currentDirection = Direction.Right;
-            _isStoped = true;
-            Invoke("ContinueWalk", _stopTime);
-            eventOnLeftTarget.Invoke();
+            return;
          }
-      }
-      else
-      {
-         transform.position += new Vector3(Time.deltaTime * _speed, 0f, 0f);
-         if (transform.position.x > _rightTarget.position.x)
+
+         if (_currentDirection == Direction.Left)
          {
-            _currentDirection = Direction.Left;
-            _isStoped = true;
-            Invoke("ContinueWalk", _stopTime);
-            eventOnRightTarget.Invoke();
+            transform.position -= new Vector3(Time.deltaTime * _speed, 0f, 0f);
+            if (transform.position.x < _leftTarget.position.x)
+            {
+               _currentDirection = Direction.Right;
+               _isStoped = true;
+               Invoke("ContinueWalk", _stopTime);
+               eventOnLeftTarget.Invoke();
+            }
+         }
+         else
+         {
+            transform.position += new Vector3(Time.deltaTime * _speed, 0f, 0f);
+            if (transform.position.x > _rightTarget.position.x)
+            {
+               _currentDirection = Direction.Left;
+               _isStoped = true;
+               Invoke("ContinueWalk", _stopTime);
+               eventOnRightTarget.Invoke();
+            }
+         }
+
+         RaycastHit hit;
+         if (Physics.Raycast(_rayStart.position, Vector3.down, out hit))
+         {
+            transform.position = hit.point;
          }
       }
 
-      RaycastHit hit;
-      if (Physics.Raycast(_rayStart.position, Vector3.down, out hit))
+      private void ContinueWalk()
       {
-         transform.position = hit.point;
+         _isStoped = false;
       }
-   }
- 
-   private void ContinueWalk()
-   {
-      _isStoped = false;
    }
 }

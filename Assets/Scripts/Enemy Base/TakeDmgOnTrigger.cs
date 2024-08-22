@@ -1,26 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TakeDmgOnTrigger : MonoBehaviour
+namespace Guns
 {
-    [SerializeField] private EnemyHealh _enemyHealh;
-    [SerializeField] private bool _dieOnAnyCollision;
-
-    private void OnTriggerEnter(Collider other)
+    public class TakeDmgOnTrigger : MonoBehaviour
     {
-        if (other.attachedRigidbody)
-        {
-            if (other.attachedRigidbody.GetComponent<Bullet>())
-            {
-                _enemyHealh.TakeDamage(1);
-            }
-        }
+        [SerializeField] private EnemyHealh _enemyHealh;
+        [SerializeField] private bool _dieOnAnyCollision;
 
-        if (_dieOnAnyCollision == true)
+        private void OnTriggerEnter(Collider other)
         {
-            _enemyHealh.TakeDamage(10000);
+            if (other.attachedRigidbody)
+            {
+                if (other.attachedRigidbody.GetComponent<Bullet>())
+                {
+                    _enemyHealh.TakeDamage(1);
+                }
+            }
+
+            if (_dieOnAnyCollision)
+            {
+                _enemyHealh.TakeDamage(10000);
+            }
         }
     }
 }

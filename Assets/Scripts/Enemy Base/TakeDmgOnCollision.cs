@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class TakeDmgOnCollision : MonoBehaviour
+namespace Guns
 {
-   [SerializeField] private EnemyHealh _enemyHealh;
-   [SerializeField] private bool _dieOnAnyCollision;
-
-    private void OnCollisionEnter(Collision collision)
+    public class TakeDmgOnCollision : MonoBehaviour
     {
-        if (collision.rigidbody)
-        {
-            if (collision.rigidbody.GetComponent<Bullet>())
-            {
-                _enemyHealh.TakeDamage(1);
-            }
-        }
+        [SerializeField] private EnemyHealh _enemyHealh;
+        [SerializeField] private bool _dieOnAnyCollision;
 
-        if (_dieOnAnyCollision == true)
+        private void OnCollisionEnter(Collision collision)
         {
-            _enemyHealh.TakeDamage(10000);
+            if (collision.rigidbody)
+            {
+                if (collision.rigidbody.GetComponent<Bullet>())
+                {
+                    _enemyHealh.TakeDamage(1);
+                }
+            }
+
+            if (_dieOnAnyCollision)
+            {
+                _enemyHealh.TakeDamage(10000);
+            }
         }
     }
 }

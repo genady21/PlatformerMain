@@ -1,29 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateToTargetEuler : MonoBehaviour
+namespace Enemy
 {
-  [SerializeField] private Vector3 _leftEuler;
-  [SerializeField] private Vector3 _rightEuler;
-  
-  [SerializeField] private float _rotationSpeed=1f;
-
-  private Vector3 _targetEuler;
-
-  private void Update()
+  public class RotateToTargetEuler : MonoBehaviour
   {
-    transform.rotation=Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetEuler),Time.deltaTime*_rotationSpeed );
-  }
+    [SerializeField] private Vector3 _leftEuler;
+    [SerializeField] private Vector3 _rightEuler;
 
-  public void RotateLeft()
-  {
-    _targetEuler = _leftEuler;
-  }
+    [SerializeField] private float _rotationSpeed = 1f;
 
-  public void RotateRight()
-  {
-    _targetEuler = _rightEuler;
+    private Vector3 _targetEuler;
+
+    private void Update()
+    {
+      transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetEuler),
+        Time.deltaTime * _rotationSpeed);
+    }
+
+    public void RotateLeft()
+    {
+      _targetEuler = _leftEuler;
+    }
+
+    public void RotateRight()
+    {
+      _targetEuler = _rightEuler;
+    }
   }
 }

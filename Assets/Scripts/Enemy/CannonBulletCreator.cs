@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class CannonBulletCreator : MonoBehaviour
+namespace Enemy
 {
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private Transform _spawn;
-    
-    
-    public void Create()
+    public class CannonBulletCreator : MonoBehaviour
     {
-        Instantiate(_bulletPrefab, _spawn.position, Quaternion.identity);
+        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private Transform _spawn;
+        
+        public void Create()
+        {
+            Instantiate(_bulletPrefab, _spawn.position, Quaternion.identity);
+        }
     }
 }
  

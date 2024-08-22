@@ -1,14 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Head : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private Transform _target;
-
-    private void Update()
+    public class Head : MonoBehaviour
     {
-        transform.position = _target.position;
+        [SerializeField] private Transform _target;
+
+        private void Update()
+        {
+            transform.position = _target.position;
+        }
     }
 }

@@ -1,39 +1,39 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class Blink : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private Renderer[] _renderers;
-   // [SerializeField] private PlayerHealth _playerHealth;
-  
-
-    private void OnEnable()
+    public class Blink : MonoBehaviour
     {
-        PlayerHealth.EventOnTakeDamage += StartBlink;
-       // EnemyHealh.EventOnTakeDamage += StartBlink;
-    }
+        [SerializeField] private Renderer[] _renderers;
 
-    private void OnDisable()
-    {
-        PlayerHealth.EventOnTakeDamage -= StartBlink;
-      //  EnemyHealh.EventOnTakeDamage -= StartBlink;
-    }
-
-    public void StartBlink()
-    {
-        StartCoroutine(BlinkEffect());
-    }
-
-    public IEnumerator BlinkEffect()
-    {
-        for (float t = 0; t < 1; t+=Time.deltaTime)
+        private void OnEnable()
         {
-            for (int i = 0; i < _renderers.Length; i++)
+            PlayerHealth.EventOnTakeDamage += StartBlink;
+        }
+
+        private void OnDisable()
+        {
+            PlayerHealth.EventOnTakeDamage -= StartBlink;
+        }
+
+        public void StartBlink()
+        {
+            StartCoroutine(BlinkEffect());
+        }
+
+        public IEnumerator BlinkEffect()
+        {
+            for (float t = 0; t < 1; t += Time.deltaTime)
             {
-                 _renderers[i].material.SetColor("_EmissionColor", new Color(Mathf.Sin(t*30f)*0.5f+0.5f,0,0,0));
+                for (int i = 0; i < _renderers.Length; i++)
+                {
+                    _renderers[i].material
+                        .SetColor("_EmissionColor", new Color(Mathf.Sin(t * 30f) * 0.5f + 0.5f, 0, 0, 0));
+                }
+
+                yield return null;
             }
-            yield return null;
         }
     }
 }

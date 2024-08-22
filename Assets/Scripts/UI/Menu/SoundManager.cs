@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Menu
+namespace UI.Menu
 {
     public class SoundManager : MonoBehaviour
     {
